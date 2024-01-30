@@ -1,4 +1,4 @@
-# Postcode Service API 6.1.0 Release
+# Postcode Service API - Latest release notes version 6
 
 This is a major version release of the Postcode Service API containing new endpoints, features and
 some UX/UC improvements.
@@ -317,6 +317,44 @@ address details based on a zipcode, house number and house letter.
 See the documentation for more information:
 https://developers.postcodeservice.com/#germany-api-GETde-v2-address-validation
 
+```json
+{
+  "results": [
+    {
+      "street": "Tucherweg",
+      "street_language": "de",
+      "street_id": "st_407247266946847986",
+      "house_number": 48,
+      "house_letter": "A",
+      "house_letter_validated": false,
+      "house_number_addition": "treppe 1",
+      "zipcode": 40724,
+      "city": "Hilden",
+      "is_po_box": false,
+      "address_function": [
+        "unknown"
+      ],
+      "geo_precision": "rooftop",
+      "latitude": 51.1722206,
+      "longitude": 6.9403854,
+      "postal_address": {
+        "line_1": "Tucherweg 48A treppe 1",
+        "line_2": "40724 HILDEN",
+        "line_3": "Germany"
+      }
+    }
+  ],
+  "error_code": null,
+  "errors": [],
+  "pagination": {
+    "current_page": 1,
+    "results_per_page": 10,
+    "is_last_page": true
+  }
+}
+
+```
+
 ### New address-suggestions endpoint
 
 Added new endpoint 'address-suggestions' to the Germany V2 API, which returns a list of addresses  
@@ -326,6 +364,34 @@ autocomplete experience.
 See the documentation for more information:
 https://developers.postcodeservice.com/#germany-api-GETde-v2-address-suggestions
 
+```json
+{
+  "results": [
+    {
+      "street": "Marbacher Berg",
+      "street_language": "de",
+      "street_id": "st_993342231655576189",
+      "zipcode": 99334,
+      "city": "Amt Wachsenburg"
+    },
+    {
+      "street": "Marbacher Chaussee",
+      "street_language": "de",
+      "street_id": "st_990928511797344426",
+      "zipcode": 99092,
+      "city": "Erfurt"
+    }
+  ],
+  "error_code": null,
+  "errors": [],
+  "pagination": {
+    "current_page": 1,
+    "results_per_page": 10,
+    "is_last_page": true
+  }
+}
+```
+
 ### New address-streetid endpoint
 
 Added new endpoint 'address-streetid' to the Germany V2 API, which returns details of an address
@@ -334,6 +400,43 @@ This endpoint can, but not required, used in combination with the 'address-sugge
 give a complete autocomplete experience to end-users.
 See the documentation for more information:
 https://developers.postcodeservice.com/#germany-api-GETde-v2-address-streetid
+
+```json
+{
+  "results": [
+    {
+      "street": "Tucherweg",
+      "street_language": "de",
+      "street_id": "st_407247266946847986",
+      "house_number": 48,
+      "house_letter": "A",
+      "house_letter_validated": false,
+      "house_number_addition": "treppe 1",
+      "zipcode": 40724,
+      "city": "Hilden",
+      "is_po_box": false,
+      "address_function": [
+        "unknown"
+      ],
+      "geo_precision": "rooftop",
+      "latitude": 51.1722206,
+      "longitude": 6.9403854,
+      "postal_address": {
+        "line_1": "Tucherweg 48A treppe 1",
+        "line_2": "40724 HILDEN",
+        "line_3": "Germany"
+      }
+    }
+  ],
+  "error_code": null,
+  "errors": [],
+  "pagination": {
+    "current_page": 1,
+    "results_per_page": 10,
+    "is_last_page": true
+  }
+}
+```
 
 ### Changes to the existing zipcode-find endpoint
 
@@ -481,6 +584,68 @@ all the additions are in lower case.
                 "line_2": "01000 BOURG-EN-BRESSE",
                 "line_3": "France"
             }
+```
+
+### New zipcode-find endpoint
+
+- Added `zipcode-find` endpoint. This endpoint expects a part of zipcode or city name and will
+  return a list of matches.
+
+See https://developers.postcodeservice.com/#french-api-GETfr-v1-zipcode-find
+
+```json
+{
+  "results": [
+    {
+      "zipcode": "01000",
+      "city": "Bourg-en-Bresse",
+      "geo_precision": "geometric_center",
+      "latitude": 46.202836199928,
+      "longitude": 5.23269573883
+    },
+    {
+      "zipcode": "01000",
+      "city": "Saint-Denis-lès-Bourg",
+      "geo_precision": "geometric_center",
+      "latitude": 46.202687320372,
+      "longitude": 5.1976543021978
+    }
+  ],
+  "error_code": null,
+  "errors": [],
+  "pagination": {
+    "current_page": 1,
+    "results_per_page": 10,
+    "is_last_page": true
+  }
+}
+```
+
+### New street-find endpoint
+
+- Added `street-find` endpoint. This endpoint needs a correct zipcode, city name and part of a
+  street name. It will return all found matches.
+
+See https://developers.postcodeservice.com/#french-api-GETfr-v1-street-find
+
+```json
+{
+  "results": [
+    {
+      "street": "Allée Bièvre",
+      "street_language": "fr",
+      "street_id": "st_10009533927221583"
+    }
+  ],
+  "error_code": null,
+  "errors": [],
+  "pagination": {
+    "current_page": 1,
+    "results_per_page": 10,
+    "is_last_page": true
+  }
+}
+
 ```
 
 ## 🍰 Overall improvements
@@ -742,10 +907,11 @@ https://api.postcodeservice.com/nl/v6/address-validation?zipcode=1014BA&house_nu
 * We have added links to the System status https://postcodeservice.statuspage.io/ and release
   history pages (here, yeah).
 * The Postman Collection has been updated to reflect the new API structure and new features
-  at https://developers-staging.postcodeservice.com/collection.json
+  at https://developers.postcodeservice.com/collection.json
 * The Netherlands V1, V2 and V3 legacy documentation is added to the deprecated endpoints
   documentation with this release for reference purposes. Speaking about Marty McFly, we are going
   back to the future with this V1..V3 added documentation.
+* Added P.O. box example in the documentation for NL V6 endpoint.
 
 ## 🐠 UX/UC improvements
 
@@ -766,6 +932,9 @@ https://api.postcodeservice.com/nl/v6/address-validation?zipcode=1014BA&house_nu
 - Fixes in German data for villages that are on the border where some street names were also
   available in Chech language.
 - Cleaned up Belgium redundant street names in the data with human error mistyped street names.
+- Fixed rare HTTP code 500 server response for users with Dutch legacy /json/ endpoint calls and
+  the address is a postbus.
+- Fixed pagination update bug in NL V6 endpoint.
 
 ## ✨ Behind the scenes
 
@@ -783,5 +952,6 @@ https://api.postcodeservice.com/nl/v6/address-validation?zipcode=1014BA&house_nu
 
 ## 🐰 Release credits
 
-- Thanks go out to the following external people for contributing to this release: Peter S. and Tim S.,
+- Thanks go out to the following external people for contributing to this release: Peter S. and Tim
+  S.,
   Viktoria S.
