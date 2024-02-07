@@ -912,6 +912,9 @@ https://api.postcodeservice.com/nl/v6/address-validation?zipcode=1014BA&house_nu
   documentation with this release for reference purposes. Speaking about Marty McFly, we are going
   back to the future with this V1..V3 added documentation.
 * Added P.O. box example in the documentation for NL V6 endpoint.
+* Added example for multiple results for certain street & city combinations for NL
+  address-streetcity.
+* Changed external CDN javascript library to increase initial loading speed.
 
 ## 🐠 UX/UC improvements
 
@@ -935,6 +938,11 @@ https://api.postcodeservice.com/nl/v6/address-validation?zipcode=1014BA&house_nu
 - Fixed rare HTTP code 500 server response for users with Dutch legacy /json/ endpoint calls and
   the address is a postbus.
 - Fixed pagination update bug in NL V6 endpoint.
+- Fixed a bug for the zipcode-find endpoints when entering a zipcode number that is not valid in
+  some rare cases a 500 error is returned instead of the 429 error.
+- Fixed DE v2 in certain cases the zipcode returned an integer instead of string.
+- Fixed pagination number update bug for NL address-streetid, address-streetcity and NL
+  zipcode-location.
 
 ## ✨ Behind the scenes
 
