@@ -915,6 +915,8 @@ https://api.postcodeservice.com/nl/v6/address-validation?zipcode=1014BA&house_nu
 * Added example for multiple results for certain street & city combinations for NL
   address-streetcity.
 * Changed external CDN javascript library to increase initial loading speed.
+* For the Netherlands: Updated the street_id examples with the new street_id number sequence.
+* Added house_number_validation response to the French documentation where applicable.
 
 ## 🐠 UX/UC improvements
 
@@ -961,5 +963,4 @@ https://api.postcodeservice.com/nl/v6/address-validation?zipcode=1014BA&house_nu
 ## 🐰 Release credits
 
 - Thanks go out to the following external people for contributing to this release: Peter S. and Tim
-  S.,
-  Viktoria S.
+  S., Viktoria S., Robert G.
