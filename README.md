@@ -207,6 +207,72 @@ https://api.postcodeservice.com/nl/v6/address-streetid?street_id=st_815866234577
 > than other reversed
 > look-up services on the market.
 
+### New zipcode-find endpoint
+
+- Added new endpoint 'zipcode-find' to the Netherlands V6 API, which returns zipcode and city based
+  on part of a zipcode or part of a city name.
+- This endpoint can be used to use address autocompletion in a uniform matter as the function is
+  also available for the BE, DE and FR endpoints.
+
+This is what the endpoint returns for a zipcode starting with 1014B..:
+
+```json 
+{
+  "results": [
+    {
+      "zipcode": "1014BA",
+      "city": "Amsterdam",
+      "geo_precision": "geometric_center",
+      "latitude": 52.395165076005,
+      "longitude": 4.8463242519372
+    },
+    {
+      "zipcode": "1014BB",
+      "city": "Amsterdam",
+      "geo_precision": "geometric_center",
+      "latitude": 52.392131796179,
+      "longitude": 4.8478134644369
+    }
+  ],
+  "error_code": null,
+  "errors": [],
+  "pagination": {
+    "current_page": 1,
+    "results_per_page": 10,
+    "is_last_page": false
+  }
+}
+```
+
+### New street-find endpoint
+
+- Added new endpoint 'street-find' to the Netherlands V6 API, which returns all streets that meet
+  the criteria zipcode, city name and part of a street name.
+- This endpoint can be used to use address autocompletion in a uniform matter as the function is
+  also available for the BE, DE and FR endpoints.
+
+This is what the endpoint returns when providing '1014BA' as zipcode, 'Amsterdam' as city and a
+street starting with 'Kabel':
+
+```json 
+{
+  "results": [
+    {
+      "street": "Kabelweg",
+      "street_language": "nl",
+      "street_id": "st_4876428982452"
+    }
+  ],
+  "error_code": null,
+  "errors": [],
+  "pagination": {
+    "current_page": 1,
+    "results_per_page": 10,
+    "is_last_page": true
+  }
+}
+```
+
 ### Changed zipcode-location endpoint
 
 - The zipcode-location endpoint is expanded with geo precision, province and 'is on Wadden Island'
@@ -917,6 +983,9 @@ https://api.postcodeservice.com/nl/v6/address-validation?zipcode=1014BA&house_nu
 * Changed external CDN javascript library to increase initial loading speed.
 * For the Netherlands: Updated the street_id examples with the new street_id number sequence.
 * Added house_number_validation response to the French documentation where applicable.
+* Simplified Authentication requests documentation part.
+* Added maximum page limit value to the documentation.
+* Removed optional x-Domain header from documentation.
 
 ## 🐠 UX/UC improvements
 
@@ -926,6 +995,7 @@ https://api.postcodeservice.com/nl/v6/address-validation?zipcode=1014BA&house_nu
   feature requests directly from the documentation. https://postcodeservice.com/feature-request/
 - Added new support and bug report form to the Postcode Service API documentation, allowing users to
   submit bug reports directly from the documentation. https://postcodeservice.com/support/
+- Improved documentation page loading speed by optimizing underlying javascript code.
 
 ## 🐞 Fixed bugs
 
@@ -945,6 +1015,9 @@ https://api.postcodeservice.com/nl/v6/address-validation?zipcode=1014BA&house_nu
 - Fixed DE v2 in certain cases the zipcode returned an integer instead of string.
 - Fixed pagination number update bug for NL address-streetid, address-streetcity and NL
   zipcode-location.
+- Fixed a bug where NL V6 Postbus data returns a single array instead of a multi array when only one
+  item is found.
+- Fixed a bug for zipcode-find where some input characters were not accepted.
 
 ## ✨ Behind the scenes
 
