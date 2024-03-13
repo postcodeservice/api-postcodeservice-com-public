@@ -954,7 +954,7 @@ For example older Netherlands V5 call with houseno parameter (deprecated, but st
 Version 5 and below:
 
 ```text
-https://api.postcodeservice.com/nl/v5/address-validation?zipcode=1014BA&houseno=21
+https://api.postcodeservice.com/nl/v5/find?zipcode=1014BA&houseno=21
 ```
 
 New V6:
@@ -1000,8 +1000,7 @@ https://api.postcodeservice.com/nl/v6/address-validation?zipcode=1014BA&house_nu
 ## 🐞 Fixed bugs
 
 - Fixed HTTP code 500 server response when users added certain Unicode characters (tropical fish,
-  etc.) to the parameters
-  of the endpoints.
+  etc.) to the parameters of the endpoints.
 - Fixed an HTTP code 500 server response for the Belgium houseno-match endpoint when supplying
   incorrect parameters.
 - Fixes in German data for villages that are on the border where some street names were also
